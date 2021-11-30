@@ -79,6 +79,7 @@ d$PF_low <- as.numeric(d$PF_low)
 d$trombocytes <- as.numeric(d$trombocytes)
 d$bilirubine <- as.numeric(d$bilirubine)
 d$GCS <- as.numeric(d$GCS)
+d$GCS_admission <- as.numeric(d$GCS_admission)
 d$creatinine <- as.numeric(d$creatinine)
 
 d[d == -99] <- NA
@@ -108,7 +109,7 @@ d$SOFA_live <- ifelse(d$bilirubine > 204, 4,
 
 d$SOFA_card <- ifelse(d$vasopressors == 1 & d$nor > 0.1, 4,
                ifelse(d$vasopressors == 1 & d$nor > 0, 3,
-               ifelse(d$MAP_low <70, 1,
+               ifelse(d$MAP_low < 70, 1,
                ifelse(d$MAP_low >= 70, 0, NA))))
 
 d$SOFA_neur <- ifelse(is.na(d$GCS),
@@ -142,10 +143,6 @@ d$SOFA_rena <- ifelse(d$dialysis == 1, 4,
 
 d$SOFA_score <- rowSums(data.frame(d$SOFA_resp, d$SOFA_coag, d$SOFA_live,
                                    d$SOFA_card, d$SOFA_neur, d$SOFA_rena))
-
-d$SOFA_score_min_neuro <-  rowSums(data.frame(d$SOFA_resp, d$SOFA_coag,
-                                              d$SOFA_live, d$SOFA_card,
-                                              d$SOFA_rena))
 
 ## Data opslaan om te modelleren
 setwd("c:/Users/sande/Documents/Werk/sofa/data")
