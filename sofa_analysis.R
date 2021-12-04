@@ -6,7 +6,7 @@
 ### Doel syntax: model voorspelling uiteindelijk overlijden
 ###
 ### Start: 26/11/2021
-### Laatste aanpassing: 30/11/2021
+### Laatste aanpassing: 01/12/2021
 ###
 ### sessionInfo()
 ###
@@ -61,7 +61,7 @@ names(res)[3] <- "Slope"
 
 res$day1  <- round(res$Intercept + 1*res$Slope, 1)
 res$day5  <- round(res$Intercept + 5*res$Slope, 1)
-res$delta <- round(4*res$Slope, 1)
+res$delta <- round(7*res$Slope, 1)
 
 ## Databestand maken waarbij iedere patient één observatie bijdraagt
 dp <- d[!duplicated(d$Record.Id, fromLast = TRUE), ]
@@ -125,7 +125,7 @@ hist(dp$kans)
 
 dp <- subset(dp, !is.na(dp$kans))
 
-afkap <- seq(25, 95, 2.5)
+afkap <- seq(25, 97.5, 2.5)
 sens  <- rep(NA, length(afkap))
 spec  <- rep(NA, length(afkap))
 ppv   <- rep(NA, length(afkap))
