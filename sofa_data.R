@@ -32,10 +32,10 @@ library(reshape2)
 library(data.table)
 
 ## Verwijzing naar map waarin data staat
-setwd("C:/Users/sande/Documents/Werk/sofa/data")
+# setwd("C:/Users/sande/Documents/Werk/sofa/data")
 
 ## Admission data uit csv-bestand inlezen
-a <- read.csv("COVID19_MUMC__export_20211126.csv", header = TRUE, sep = ";")
+a <- read.csv("./Data/COVID19_MUMC__export_20211126.csv", header = TRUE, sep = ";")
 names(a)[1] <- "Record.Id"
 
 ## Inspectie data: unieke patientnummers
@@ -52,7 +52,7 @@ sum(is.na(a$gender))
 a <- subset(a, !is.na(a$gender))
 
 ## Daily data uit csv-bestand inlezen
-d <- read.csv("DailyCRFTotal.csv", header = TRUE, sep = ",")
+d <- read.csv("./Data/DailyCRFTotal.csv", header = TRUE, sep = ",")
 names(d)[1] <- "Record.Id"
 length(d$Record.Id)
 length(unique(d$Record.Id))
@@ -145,7 +145,7 @@ d$SOFA_score <- rowSums(data.frame(d$SOFA_resp, d$SOFA_coag, d$SOFA_live,
                                    d$SOFA_card, d$SOFA_neur, d$SOFA_rena))
 
 ## Data opslaan om te modelleren
-setwd("c:/Users/sande/Documents/Werk/sofa/data")
-save(d, file = "sofa_data.Rda")
+# setwd("c:/Users/sande/Documents/Werk/sofa/data")
+save(d, file = "./Data/sofa_data.Rda")
 
 ### Einde file.

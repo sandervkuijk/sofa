@@ -34,8 +34,8 @@ library(pROC)
 library(data.table)
 
 ## Databestand gecreeerd met sofa_data.R inlezen
-setwd("C:/Users/sande/Documents/Werk/sofa/data")
-load("sofa_data.Rda")
+# setwd("C:/Users/sande/Documents/Werk/sofa/data")
+load("./Data/sofa_data.Rda")
 
 ## Voor deze analyse: subsets o.b.v. dagen
 d   <- subset(d, d$dag > 0)
@@ -107,8 +107,8 @@ model3
 r <- roc(dp$event, predict(model3, type = "fitted"), ci = TRUE)
 r
 
-setwd("C:/Users/sande/Documents/Werk/sofa/figs")
-png("auc.png", width = 500, height = 500, pointsize = 16)
+# setwd("C:/Users/sande/Documents/Werk/sofa/figs")
+png("./Figs/auc.png", width = 500, height = 500, pointsize = 16)
 plot(r)
 dev.off()
 
@@ -177,5 +177,11 @@ ligpl <- round(ligdl/sum(dp$ICU_LoS, na.rm = TRUE)*100, 1)
 
 afkapl <- "lft>75"
 data.frame(afkapl, sensl, specl, ppvl, npvl, abstl, miscl, ligdl, ligpl)
+
+## Maak lijst met patiënten die onterecht zijn overleden om te checken
+afkapCheck <- 80 # Zelf kiezen
+onterechtDoodIndices <- dp$kans*100>afkapCheck & dp$ICU_mortality=='Alive'
+length(onterechtDoodIndices[onterechtDoodIndices==TRUE])
+dp$Record.Id[onterechtDoodIndices]
 
 ### Einde file.
