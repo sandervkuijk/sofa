@@ -31,11 +31,11 @@
 library(mice)
 
 ## Databestand gecreeerd met sofa_data.R inlezen
-setwd("C:/Users/sande/Documents/Werk/sofa/data")
-load("sofa_data.Rda")
+# setwd("C:/Users/sande/Documents/Werk/sofa/data")
+load("./Data/sofa_data.Rda")
 
-setwd("C:/Users/sande/Documents/Werk/sofa/figs")
-png("missing_pattern.png", width = 400, height = 900, pointsize = 16)
+# setwd("C:/Users/sande/Documents/Werk/sofa/figs")
+png("./Figs/missing_pattern.png", width = 400, height = 900, pointsize = 16)
 md.pattern(d[, 237:244], rotate.names = TRUE)
 dev.off()
 
